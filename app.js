@@ -27,6 +27,7 @@ if (process.env.DB_HOST) {
 app.get("/", (req, res) => {
   res.send("Mini-project 4 CI works ✅");
 });
+const x =5;
 
 app.listen(port, () => {
   console.log(`🚀 App running on port ${port}`);
