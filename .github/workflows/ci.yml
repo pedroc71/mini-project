@@ -27,3 +27,6 @@ jobs:
 
       - name: Run tests (RED/GREEN rule)
         run: npm test
+
+      - name: Trivy scan
+        run: trivy image --exit-code 1 --severity HIGH,CRITICAL mini-project
