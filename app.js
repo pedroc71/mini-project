@@ -3,7 +3,7 @@ const { Client } = require("pg");
 
 const app = express();
 const port = 3000;
-
+const x=5;
 const client = new Client({
   host: process.env.DB_HOST, // db
   user: process.env.POSTGRES_USER,
