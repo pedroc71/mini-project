@@ -2,25 +2,33 @@ const express = require("express");
 const { Client } = require("pg");
 
 const app = express();
-const port = 3000;
+
+const PORT = process.env.PORT || 3000;
 
 const client = new Client({
-  host: process.env.DB_HOST, // db
-  user: process.env.POSTGRES_USER,
-  password: process.env.POSTGRES_PASSWORD,
-  database: process.env.POSTGRES_DB,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
 });
 
-client
-  .connect()
-  .then(() => console.log("✅ Connected to PostgreSQL"))
-  .catch((err) => console.error("❌ DB connection error", err));
+async function connectWithRetry() {
+  try {
+    await client.connect();
+    console.log("Connected to PostgreSQL");
+  } catch (err) {
+    console.error("DB not ready, retrying...", err.message);
+    setTimeout(connectWithRetry, 5000);
+  }
+}
 
+connectWithRetry();
 
 app.get("/", (req, res) => {
-  res.send("Mini-project Docker works with DB");
+  res.send("Mini-Project 5 is running");
 });
 
-app.listen(port, () => {
-  console.log(`App running on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

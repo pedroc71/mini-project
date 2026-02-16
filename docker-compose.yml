@@ -1,33 +1,31 @@
-version: "3.9"
-
 services:
   app:
     build: .
-    image: mini-project
     container_name: mini-project-app
     ports:
       - "3000:3000"
     env_file:
       - .env
-    restart: always   
     depends_on:
       db:
-       condition: service_healthy 
+        condition: service_healthy
+    restart: unless-stopped
 
   db:
     image: postgres:15-alpine
     container_name: mini-project-db
-    env_file:
-      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    restart: always  
-
     healthcheck:
-     test: ["CMD-SHELL", "pg_isready -U $POSTGRES_USER"]
-     interval: 5s
-     timeout: 5s
-     retries: 5
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
 
 volumes:
   pgdata:
