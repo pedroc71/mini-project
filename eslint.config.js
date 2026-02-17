@@ -1,18 +1,18 @@
-export default [
+module.exports = [
   {
-    ignores: ["mini-project/**"],
     files: ["**/*.js"],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
+      ecmaVersion: 2022,
+      sourceType: "script",
       globals: {
-        console: "readonly",
+        require: "readonly",
+        module: "readonly",
         process: "readonly",
+        console: "readonly",
         setTimeout: "readonly"
       }
     },
     rules: {
-      "no-unused-vars": "error",
       "no-undef": "error"
     }
   }
