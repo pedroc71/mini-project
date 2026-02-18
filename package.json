@@ -1,23 +1,26 @@
 {
    "name": "mini-project",
-  "version": "1.0.0",
-  "type": "module",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "lint": "eslint .",
-    "test": "echo \"No tests yet\""
+   "version": "1.0.0",
+  "overrides": {
+    "eslint": {
+      "ajv": "8.18.0"
+    }
   },
-  "dependencies": {
-    "brace-expansion": "^2.0.2",
-    "cross-spawn": "^7.0.6",
-    "diff": "^5.2.2",
-    "express": "^4.19.2",
-    "glob": "^13.0.4",
-    "pg": "^8.11.5",
-    "tar": "^7.5.8"
-  },
-  "devDependencies": {
-    "eslint": "^9.39.2"
-  }
+   "type": "module",
+   "main": "app.js",
+   "scripts": {
+      "start": "node app.js",
+      "lint": "eslint .",
+      "test": "echo \"No tests yet\""
+   },
+   "dependencies": {
+      "ajv": "8.18.0",
+      "express": "^4.21.2",
+      "pg": "^8.13.1",
+      "tar": "7.5.8"
+   },
+   "devDependencies": {
+      "eslint": "^10.0.0",
+      "patch-package": "^8.0.1"
+   }
 }

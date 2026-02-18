@@ -22,3 +22,6 @@ trivy_*
 *.tar.gz
 *.zip
 *.bin
+trivy-report.txt
+EOF
+

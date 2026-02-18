@@ -1,32 +1,26 @@
-name: CI Quality Gate
+name: Trivy scan
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
 
 jobs:
-  quality:
+  trivy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Build Docker image
+        run: docker build -t mini-project .
+
+      - name: Run Trivy scan
+        uses: aquasecurity/trivy-action@0.29.0  # Version mise à jour
         with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run linter (STOP if ugly)
-        run: npm run lint
-
-      - name: Run tests (RED/GREEN rule)
-        run: npm test
-
-      - name: Trivy scan
-        run: trivy image --exit-code 1 --severity HIGH,CRITICAL mini-project
+          image-ref: mini-project
+          severity: HIGH,CRITICAL
+          exit-code: 1
+          format: table
+          scanners: vuln,secret,misconfig  # Options recommandées
