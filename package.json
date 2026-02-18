@@ -9,12 +9,13 @@
     "test": "echo \"No tests yet\""
   },
   "dependencies": {
+    "brace-expansion": "^2.0.2",
     "cross-spawn": "^7.0.6",
-    "diff": "^8.0.3",
+    "diff": "^5.2.2",
     "express": "^4.19.2",
     "glob": "^13.0.4",
     "pg": "^8.11.5",
-    "tar": "^7.5.9"
+    "tar": "^7.5.8"
   },
   "devDependencies": {
     "eslint": "^9.39.2"
